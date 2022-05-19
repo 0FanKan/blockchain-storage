@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chain</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/android-chrome-192x192.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index_style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="name_page">Blocks</h1>
+    </header>
+    <main>
+        <div class="container">
+            <p>#Total of {{len_blocks}} blocks</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Block</th>
+                        <th>Time</th>
+                        <th>Hash</th>
+                        <th>Previous Hash</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for block in chains %}
+                        <tr>
+                            <td><a href="/blockchain/{{block['index']}}" target="_blank">{{block["index"]}}</a></td>
+                            <td>{{block["timestamp"][:16]}}</td>
+                            <td>{{block["hash"][:20] + ".."}}</td>
+                            <td>{{block["prev_hash"][:20] + ".."}}</td>
+                            <td><a href="/blockchain/{{block['index']}}/data" target="_blank">...</a></td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
